@@ -56,14 +56,14 @@ index de0662f..7535c3e 100644
  	uninit_gui_libs(L);
  	lua_close(L);
 diff --git a/include.mk b/include.mk
-index dbf51ca..7d0b713 100644
+index dbf51ca..2e537ae 100644
 --- a/include.mk
 +++ b/include.mk
 @@ -9,6 +9,7 @@ ifeq ($(HOSTPLATFORM),MINGW)
  OSTYPE=Windows
  EXE=.exe
  DLL=.dll
-+#LIB=.dll
++LIB=.dll
  # Note may be freetype or freetype6 depending on CD version, zlib requried for 5.5 and later
  CD_FREETYPE_LIB=freetype6 z
  #CD_FREETYPE_LIB=freetype z
@@ -71,13 +71,21 @@ index dbf51ca..7d0b713 100644
  OSTYPE=Linux
  EXE=
  DLL=.so
-+#LIB=.so
++LIB=.so
  CD_FREETYPE_LIB=freetype z
  endif
  ifeq ($(HOSTPLATFORM),Darwin)
-@@ -32,7 +34,7 @@ endif
+@@ -24,6 +26,7 @@ OSTYPE=Darwin
+ EXE=
+ # TODO .dylib? only used for signal
+ DLL=.so
++LIB=.so
+ # TODO?
+ CD_FREETYPE_LIB=freetype z
+ endif
+@@ -32,7 +35,7 @@ endif
  EXE_EXTRA=
- 
+
  CC=gcc
 -CFLAGS=-DCHDKPTP_OSTYPE=\"$(OSTYPE)\" -Wall
 +CFLAGS=-DCHDKPTP_OSTYPE=\"$(OSTYPE)\" -Wall -fPIC -g
